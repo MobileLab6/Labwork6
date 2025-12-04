@@ -70,12 +70,10 @@ const ToDo: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader className="todo-header">
-        <IonButtons slot="start">
+      <IonContent className="todo-content">
+        <IonButtons className="menu-button-container">
           <IonMenuButton className="menu-button" />
         </IonButtons>
-      </IonHeader>
-      <IonContent className="todo-content">
         <div className="todo-container">
           <h1 className="todo-title">Your To-Do List</h1>
           
