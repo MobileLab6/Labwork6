@@ -54,7 +54,7 @@ const RegisterPage: React.FC = () => {
 
               <IonItem className="register-item">
                 <IonInput
-                  placeholder="Username"
+                  placeholder="Email"
                   value={email}
                   onIonChange={(e) => setEmail(e.detail.value || "")}
                 />
