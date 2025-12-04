@@ -25,7 +25,7 @@ const WelcomePage: React.FC = () => {
       <p className="welcome-subtitle">Remember, plan, do, done</p>
 
       <div className="welcome-buttons">
-        <IonButton expand="block" className="primary-btn" routerLink="/Login">
+        <IonButton expand="block" className="primary-btn" routerLink="/Login" >
           Create an account
         </IonButton>
 
