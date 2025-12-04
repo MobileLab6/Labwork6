@@ -1,0 +1,76 @@
+/* IonContent itse */
+.welcome-content {
+  --background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Tämä wrapper tekee oikean keskityksen */
+.welcome-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Logo */
+.welcome-logo {
+  background-color: #759b9b;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  font-size: 22px;
+  font-weight: 700;
+  font-family: "Courier New", monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  transform: rotate(-2deg);
+}
+
+/* Title */
+.welcome-title h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Subtitle */
+.welcome-subtitle {
+  font-size: 15px;
+  color: #3a3a3a;
+  margin-bottom: 50px;
+}
+
+/* Button container */
+.welcome-buttons {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Buttons */
+.primary-btn,
+.secondary-btn {
+  --border-radius: 10px;
+  height: 48px;
+  font-size: 16px;
+  text-transform: none;
+}
+
+.primary-btn {
+  --background: #1f3c3a;
+  --color: white;
+}
+
+.secondary-btn {
+  --color: #1f3c3a;
+  --border-color: #1f3c3a;
+  --border-width: 2px;
+}

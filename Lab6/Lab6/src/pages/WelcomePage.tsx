@@ -10,41 +10,35 @@ import './WelcomePage.css';
 const WelcomePage: React.FC = () => {
   return (
     <IonPage>
-      <IonContent fullscreen className="welcome-content">
+  <IonContent fullscreen className="welcome-content">
 
-        {/* Logo */}
-        <div className="welcome-logo">
-          To-Do<br />List
-        </div>
+    <div className="welcome-wrapper">
 
-        {/* Title */}
-        <IonText className="welcome-title">
-          <h1>Welcome</h1>
-        </IonText>
+      <div className="welcome-logo">
+        To-Do<br />List
+      </div>
 
-        {/* Subtitle */}
-        <p className="welcome-subtitle">Remember, plan, do, done</p>
+      <IonText className="welcome-title">
+        <h1>Welcome</h1>
+      </IonText>
 
-        {/* Buttons */}
-        <div className="welcome-buttons">
-          <IonButton
-            expand="block"
-            className="primary-btn"
-          >
-            Create an account
-          </IonButton>
+      <p className="welcome-subtitle">Remember, plan, do, done</p>
 
-          <IonButton
-            expand="block"
-            fill="outline"
-            className="secondary-btn"
-          >
-            Login
-          </IonButton>
-        </div>
+      <div className="welcome-buttons">
+        <IonButton expand="block" className="primary-btn">
+          Create an account
+        </IonButton>
 
-      </IonContent>
-    </IonPage>
+        <IonButton expand="block" fill="outline" className="secondary-btn">
+          Login
+        </IonButton>
+      </div>
+
+    </div>
+
+  </IonContent>
+</IonPage>
+
   );
 };
 
