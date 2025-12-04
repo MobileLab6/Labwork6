@@ -10,6 +10,7 @@ import { Route, Redirect } from 'react-router-dom';
 import Tab1 from './pages/WelcomePage';
 import Tab2 from './pages/Login';
 import Tab3 from './pages/Register';
+import ToDo from "./pages/ToDo";
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -51,6 +52,7 @@ const App: React.FC = () => (
         <Route exact path="/tab1" component={Tab1} />
         <Route exact path="/tab2" component={Tab2} />
         <Route path="/tab3" component={Tab3} />
+        <Route exact path="/todo" component={ToDo} />
         <Route exact path="/">
           <Redirect to="/tab1" />
         </Route>
