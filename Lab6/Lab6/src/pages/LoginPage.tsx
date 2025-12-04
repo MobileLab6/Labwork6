@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import {
   IonPage,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonContent,
   IonItem,
-  IonLabel,
   IonInput,
   IonButton,
   IonText,
@@ -14,6 +10,8 @@ import {
 import { useIonRouter } from "@ionic/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+
+import "./LoginPage.css";
 
 const LoginPage: React.FC = () => {
   const router = useIonRouter();
@@ -37,47 +35,57 @@ const LoginPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Login</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        {error && (
-          <IonText color="danger">
-            <p>{error}</p>
-          </IonText>
-        )}
+      <IonContent fullscreen className="login-content">
+        <div className="login-wrapper">
+          {/* Logo */}
+          <div className="login-logo">
+            To-Do<br />List
+          </div>
 
-        <IonItem>
-          <IonLabel position="stacked">Email</IonLabel>
-          <IonInput
-            value={email}
-            onIonChange={(e) => setEmail(e.detail.value || "")}
-          />
-        </IonItem>
+          {/* Virheilmoitus */}
+          {error && (
+            <IonText color="danger">
+              <p className="login-error">{error}</p>
+            </IonText>
+          )}
 
-        <IonItem>
-          <IonLabel position="stacked">Password</IonLabel>
-          <IonInput
-            type="password"
-            value={password}
-            onIonChange={(e) => setPassword(e.detail.value || "")}
-          />
-        </IonItem>
+          {/* Vihreä laatikko kentille + napille */}
+          <div className="login-card">
+            <IonItem className="login-item">
+              <IonInput
+                placeholder="Email"
+                value={email}
+                onIonChange={(e) => setEmail(e.detail.value || "")}
+              />
+            </IonItem>
 
-        <IonButton expand="block" className="ion-margin-top" onClick={handleLogin}>
-          Login
-        </IonButton>
+            <IonItem className="login-item">
+              <IonInput
+                type="password"
+                placeholder="Password"
+                value={password}
+                onIonChange={(e) => setPassword(e.detail.value || "")}
+              />
+            </IonItem>
 
-        <IonButton
-          expand="block"
-          fill="clear"
-          className="ion-margin-top"
-          onClick={goToRegister}
-        >
-          Create an account
-        </IonButton>
+            <IonButton
+              expand="block"
+              className="login-button"
+              onClick={handleLogin}
+            >
+              Login
+            </IonButton>
+
+            <IonButton
+              expand="block"
+              fill="clear"
+              className="login-link"
+              onClick={goToRegister}
+            >
+              Create an account
+            </IonButton>
+          </div>
+        </div>
       </IonContent>
     </IonPage>
   );

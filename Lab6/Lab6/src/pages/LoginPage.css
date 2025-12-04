@@ -1,0 +1,91 @@
+/* Tausta + yleinen keskitys */
+.login-content {
+  --background: #ffffff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 60px;
+}
+
+/* Wrapper keskittää sisällön vaakasuunnassa */
+.login-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo-badge samaan tyyliin kuin welcome-sivulla */
+.login-logo {
+  background-color: #759b9b;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  font-family: "Courier New", monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(-2deg);
+  margin-bottom: 30px;
+}
+
+/* Error-teksti */
+.login-error {
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+/* Vihertävä laatikko, jossa kentät ja nappi */
+.login-card {
+  background-color: #779da0;
+  width: 100%;
+  max-width: 340px;
+  padding: 18px 18px 22px;
+}
+
+/* Kenttien laatikot */
+.login-item {
+  --background: #88aeb1;
+  --border-radius: 6px;
+  --min-height: 48px;
+  margin-bottom: 10px;
+  border: 1px solid #e0f0f1;
+}
+
+/* Poistetaan IonItemin oletus-ala­viiva */
+.login-item::part(native) {
+  border-bottom: none !important;
+}
+
+/* Input-tekstin ja placeholderin väri */
+.login-item .native-input {
+  color: #ffffff;
+}
+
+.login-item .native-input::placeholder {
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+/* Tumma "Sign Up / Login" -nappi */
+.login-button {
+  --background: #1f3c3a;
+  --background-hover: #264745;
+  --border-radius: 8px;
+  --box-shadow: none;
+  height: 48px;
+  font-size: 16px;
+  text-transform: none;
+  margin-top: 8px;
+}
+
+/* Alin linkkinappi ("Create an account") */
+.login-link {
+  --color: #ffffff;
+  margin-top: 4px;
+  text-transform: none;
+  font-size: 14px;
+}
