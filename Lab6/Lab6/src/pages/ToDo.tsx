@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   IonContent,
   IonPage,
-  IonHeader,
   IonMenuButton,
   IonButtons,
 } from '@ionic/react';

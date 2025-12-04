@@ -6,6 +6,16 @@ ion-menu {
 ion-menu ion-toolbar {
   --background: #8BAAAD;
   --color: #000000;
+  --border-width: 0;
+  --border-style: none;
+}
+
+ion-menu ion-toolbar::part(native) {
+  border-bottom: none;
+}
+
+ion-menu ion-header {
+  box-shadow: none;
 }
 
 ion-menu ion-title {
@@ -57,7 +67,6 @@ ion-menu ion-label {
   color: #ffffff;
 }
 
-/* Back button in header */
 .back-button {
   --color: #000000;
   color: #000000;
