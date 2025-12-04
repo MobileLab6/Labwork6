@@ -22,6 +22,7 @@ const ToDo: React.FC = () => {
   ]);
   const [nextId, setNextId] = useState(4);
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
 
   const addTask = () => {
     const newTask: Task = {
@@ -33,8 +34,19 @@ const ToDo: React.FC = () => {
     setNextId(nextId + 1);
   };
 
-  const removeTask = (id: number) => {
-    setTasks(tasks.filter(task => task.id !== id));
+  const handleDeleteClick = (id: number) => {
+    setDeleteConfirmId(id);
+  };
+
+  const confirmDelete = () => {
+    if (deleteConfirmId !== null) {
+      setTasks(tasks.filter(task => task.id !== deleteConfirmId));
+      setDeleteConfirmId(null);
+    }
+  };
+
+  const cancelDelete = () => {
+    setDeleteConfirmId(null);
   };
 
   const updateTask = (id: number, newText: string) => {
@@ -92,7 +104,7 @@ const ToDo: React.FC = () => {
                 )}
                 <button 
                   className="task-delete-btn"
-                  onClick={() => removeTask(task.id)}
+                  onClick={() => handleDeleteClick(task.id)}
                 >
                   X
                 </button>
@@ -104,6 +116,22 @@ const ToDo: React.FC = () => {
             Add
           </button>
         </div>
+
+        {deleteConfirmId !== null && (
+          <div className="confirm-overlay">
+            <div className="confirm-dialog">
+              <p className="confirm-text">Are you sure you want to delete this task?</p>
+              <div className="confirm-buttons">
+                <button className="confirm-btn-yes" onClick={confirmDelete}>
+                  Yes
+                </button>
+                <button className="confirm-btn-no" onClick={cancelDelete}>
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </IonContent>
     </IonPage>
   );
