@@ -14,6 +14,7 @@ import { ellipse, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/WelcomePage';
 import Tab2 from './pages/Login';
 import Tab3 from './pages/Register';
+import Tab4 from './pages/ToDo';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
