@@ -29,7 +29,7 @@ const WelcomePage: React.FC = () => {
           Create an account
         </IonButton>
 
-        <IonButton expand="block" fill="outline" className="secondary-btn" routerLink="/Register">
+        <IonButton expand="block" fill="outline" className="secondary-btn" >
           Login
         </IonButton>
       </div>
