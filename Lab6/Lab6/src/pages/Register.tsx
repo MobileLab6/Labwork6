@@ -1,25 +1,74 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Register.css';
+// src/pages/RegisterPage.tsx
+import React, { useState } from "react";
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonButton,
+  IonText,
+} from "@ionic/react";
+import { useIonRouter } from "@ionic/react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
-const Tab3: React.FC = () => {
+const RegisterPage: React.FC = () => {
+  const router = useIonRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleRegister = async () => {
+    setError("");
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      router.push("/app", "root");
+    } catch {
+      setError("Rekisteröinti epäonnistui. Salasanan pitää olla vähintään 6 merkkiä.");
+    }
+  };
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 3</IonTitle>
+          <IonTitle>Create account</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 3</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 3 page" />
+      <IonContent className="ion-padding">
+        {error && (
+          <IonText color="danger">
+            <p>{error}</p>
+          </IonText>
+        )}
+
+        <IonItem>
+          <IonLabel position="stacked">Email</IonLabel>
+          <IonInput
+            value={email}
+            onIonChange={(e) => setEmail(e.detail.value || "")}
+          />
+        </IonItem>
+
+        <IonItem>
+          <IonLabel position="stacked">Password</IonLabel>
+          <IonInput
+            type="password"
+            value={password}
+            onIonChange={(e) => setPassword(e.detail.value || "")}
+          />
+        </IonItem>
+
+        <IonButton expand="block" className="ion-margin-top" onClick={handleRegister}>
+          Create account
+        </IonButton>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab3;
+export default RegisterPage;
