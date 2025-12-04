@@ -4,9 +4,6 @@ import {
   IonPage,
   IonMenuButton,
   IonButtons,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
 } from '@ionic/react';
 import './ToDo.css';
 
@@ -72,15 +69,10 @@ const ToDo: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader className="todo-header">
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>To-Do List</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent className="todo-content">
+        <IonButtons className="menu-button-container">
+          <IonMenuButton className="menu-button" />
+        </IonButtons>
         <div className="todo-container">
           <h1 className="todo-title">Your To-Do List</h1>
           
