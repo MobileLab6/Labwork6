@@ -7,16 +7,25 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
+  IonMenu,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonSplitPane,
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { ellipse, square, triangle, logOut } from 'ionicons/icons';
 
 import Tab1 from './pages/WelcomePage';
 import Tab2 from './pages/LoginPage';
 import Tab3 from './pages/RegisterPage';
 import ToDo from './pages/ToDo';
 
+import './menu.css';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -53,8 +62,24 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
+      <IonMenu contentId="main-content" menuId="main-menu">
+        <IonHeader>
+          <IonToolbar color="dark">
+            <IonTitle>Menu</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent className="ion-padding">
+          <IonList lines="none">
+            <IonItem button={false} lines="none" detail={false} onClick={() => console.log('Logout placeholder')}>
+              <IonIcon icon={logOut} slot="start" />
+              <IonLabel>Logout</IonLabel>
+            </IonItem>
+          </IonList>
+        </IonContent>
+      </IonMenu>
+      <IonSplitPane contentId="main-content">
+        <IonTabs>
+          <IonRouterOutlet id="main-content">
           <Route exact path="/tab1">
             <Tab1 />
           </Route>
@@ -86,6 +111,7 @@ const App: React.FC = () => (
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
+      </IonSplitPane>
     </IonReactRouter>
   </IonApp>
 );

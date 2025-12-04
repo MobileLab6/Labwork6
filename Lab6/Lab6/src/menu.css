@@ -1,0 +1,60 @@
+/* Side Menu Styles */
+ion-menu {
+  --background: #8BAAAD;
+}
+
+ion-menu ion-toolbar {
+  --background: #8BAAAD;
+  --color: #ffffff;
+}
+
+ion-menu ion-content {
+  --background: #8BAAAD;
+}
+
+ion-menu ion-list {
+  background: transparent !important;
+  padding-top: 20px;
+}
+
+ion-menu ion-list::part(list) {
+  background: transparent !important;
+}
+
+ion-menu ion-item {
+  --background: transparent !important;
+  --background-activated: transparent !important;
+  --background-focused: transparent !important;
+  --background-hover: transparent !important;
+  --color: #ffffff;
+  --border-color: transparent;
+  --highlight-background: transparent;
+  --ripple-color: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+ion-menu ion-item::part(native) {
+  background: transparent !important;
+}
+
+ion-menu ion-item:hover {
+  --background: transparent !important;
+}
+
+ion-menu ion-icon {
+  color: #ffffff;
+  font-size: 22px;
+  margin-right: 8px;
+}
+
+ion-menu ion-label {
+  color: #ffffff;
+}
+
+/* Back button in header */
+.back-button {
+  --color: #1C3738;
+  font-size: 18px;
+}
