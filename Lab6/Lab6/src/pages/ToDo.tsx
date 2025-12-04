@@ -5,7 +5,6 @@ import {
   IonHeader,
   IonMenuButton,
   IonButtons,
-  IonButton,
 } from '@ionic/react';
 import './ToDo.css';
 
