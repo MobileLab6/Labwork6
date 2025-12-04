@@ -13,6 +13,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 60px;
+  text-align: center;
 }
 
 /* Logo-badge samaan tyyliin kuin welcome- ja login-sivulla */
