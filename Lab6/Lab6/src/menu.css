@@ -28,7 +28,7 @@ ion-menu ion-content {
 
 ion-menu ion-list {
   background: transparent !important;
-  padding-top: 20px;
+  padding-top: 1px;
 }
 
 ion-menu ion-list::part(list) {
