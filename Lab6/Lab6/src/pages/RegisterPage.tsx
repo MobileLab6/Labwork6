@@ -2,12 +2,8 @@
 import React, { useState } from "react";
 import {
   IonPage,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonContent,
   IonItem,
-  IonLabel,
   IonInput,
   IonButton,
   IonText,
@@ -15,6 +11,8 @@ import {
 import { useIonRouter } from "@ionic/react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+
+import "./RegisterPage.css";
 
 const RegisterPage: React.FC = () => {
   const router = useIonRouter();
@@ -26,46 +24,61 @@ const RegisterPage: React.FC = () => {
     setError("");
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      router.push("/app", "root");
+      router.push("/todo", "root"); // tai "/app" jos käytätte sitä
     } catch {
-      setError("Rekisteröinti epäonnistui. Salasanan pitää olla vähintään 6 merkkiä.");
+      setError(
+        "Rekisteröinti epäonnistui. Salasanan pitää olla vähintään 6 merkkiä."
+      );
     }
   };
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Create account</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        {error && (
-          <IonText color="danger">
-            <p>{error}</p>
-          </IonText>
-        )}
+      <IonContent fullscreen>
+        <div className="register-content">
+          <div className="register-wrapper">
+            {/* Logo */}
+            <div className="register-logo">
+              To-Do
+              <br />
+              List
+            </div>
 
-        <IonItem>
-          <IonLabel position="stacked">Email</IonLabel>
-          <IonInput
-            value={email}
-            onIonChange={(e) => setEmail(e.detail.value || "")}
-          />
-        </IonItem>
+            {/* Vihreä kortti */}
+            <div className="register-card">
+              {error && (
+                <IonText className="register-error" color="danger">
+                  <p>{error}</p>
+                </IonText>
+              )}
 
-        <IonItem>
-          <IonLabel position="stacked">Password</IonLabel>
-          <IonInput
-            type="password"
-            value={password}
-            onIonChange={(e) => setPassword(e.detail.value || "")}
-          />
-        </IonItem>
+              <IonItem className="register-item">
+                <IonInput
+                  placeholder="Username"
+                  value={email}
+                  onIonChange={(e) => setEmail(e.detail.value || "")}
+                />
+              </IonItem>
 
-        <IonButton expand="block" className="ion-margin-top" onClick={handleRegister}>
-          Create account
-        </IonButton>
+              <IonItem className="register-item">
+                <IonInput
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onIonChange={(e) => setPassword(e.detail.value || "")}
+                />
+              </IonItem>
+
+              <IonButton
+                expand="block"
+                className="register-button"
+                onClick={handleRegister}
+              >
+                Sign Up
+              </IonButton>
+            </div>
+          </div>
+        </div>
       </IonContent>
     </IonPage>
   );
