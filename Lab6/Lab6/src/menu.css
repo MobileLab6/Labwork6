@@ -5,7 +5,11 @@ ion-menu {
 
 ion-menu ion-toolbar {
   --background: #8BAAAD;
-  --color: #ffffff;
+  --color: #000000;
+}
+
+ion-menu ion-title {
+  color: #000000;
 }
 
 ion-menu ion-content {
@@ -26,7 +30,7 @@ ion-menu ion-item {
   --background-activated: transparent !important;
   --background-focused: transparent !important;
   --background-hover: transparent !important;
-  --color: #ffffff;
+  --color: #000000;
   --border-color: transparent;
   --highlight-background: transparent;
   --ripple-color: transparent;
@@ -44,7 +48,7 @@ ion-menu ion-item:hover {
 }
 
 ion-menu ion-icon {
-  color: #ffffff;
+  color: #000000;
   font-size: 22px;
   margin-right: 8px;
 }
@@ -55,6 +59,15 @@ ion-menu ion-label {
 
 /* Back button in header */
 .back-button {
-  --color: #1C3738;
-  font-size: 18px;
+  --color: #000000;
+  color: #000000;
+  font-size: 16px;
+  text-transform: none;
+  font-weight: 400;
+}
+
+.back-button ion-icon {
+  color: #000000;
+  font-size: 20px;
+  margin-right: 4px;
 }

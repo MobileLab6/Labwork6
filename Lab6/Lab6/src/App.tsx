@@ -15,10 +15,15 @@ import {
   IonList,
   IonItem,
   IonSplitPane,
-  setupIonicReact
+  IonButtons,
+  IonButton,
+  setupIonicReact,
+  useIonAlert
 } from '@ionic/react';
+import { menuController } from '@ionic/core/components';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle, logOut } from 'ionicons/icons';
+import { useIonRouter } from '@ionic/react';
+import { ellipse, square, triangle, logOut, arrowBack } from 'ionicons/icons';
 
 import Tab1 from './pages/WelcomePage';
 import Tab2 from './pages/LoginPage';
@@ -59,15 +64,26 @@ import './theme/variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonMenu contentId="main-content" menuId="main-menu">
-        <IonHeader>
-          <IonToolbar color="dark">
-            <IonTitle>Menu</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+const App: React.FC = () => {
+  const closeMenu = async () => {
+    await menuController.close('main-menu');
+  };
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonMenu contentId="main-content" menuId="main-menu">
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot="start">
+                <IonButton className="back-button" onClick={closeMenu}>
+                  <IonIcon icon={arrowBack} />
+                  Back
+                </IonButton>
+              </IonButtons>
+              <IonTitle>Menu</IonTitle>
+            </IonToolbar>
+          </IonHeader>
         <IonContent className="ion-padding">
           <IonList lines="none">
             <IonItem button={false} lines="none" detail={false} onClick={() => console.log('Logout placeholder')}>
@@ -114,7 +130,8 @@ const App: React.FC = () => (
       </IonSplitPane>
     </IonReactRouter>
   </IonApp>
-);
+  );
+};
 
 export default App;
 
