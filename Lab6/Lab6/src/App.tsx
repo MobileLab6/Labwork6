@@ -4,91 +4,67 @@ import {
   IonApp,
   IonContent,
   IonRouterOutlet,
-  IonMenu,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonList,
-  IonItem,
-  IonLabel
-} from "@ionic/react";
-import { IonReactRouter } from "@ionic/react-router";
-import { Route, Redirect } from "react-router-dom";
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
+  setupIonicReact
+} from '@ionic/react';
+import { IonReactRouter } from '@ionic/react-router';
+import { ellipse, square, triangle } from 'ionicons/icons';
+import Tab1 from './pages/WelcomePage';
+import Tab2 from './pages/Login';
+import Tab3 from './pages/Register';
 
-import WelcomePage from "./pages/WelcomePage";
-import LoginPage from "./pages/Login";
-import RegisterPage from "./pages/Register";
-import TodoPage from "./pages/ToDo";
 
-import { auth } from "./firebaseConfig";
-import { onAuthStateChanged, signOut, User } from "firebase/auth";
+/* Core CSS required for Ionic components to work properly */
+import '@ionic/react/css/core.css';
 
-const App: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const isAuthenticated = !!user;
-  const [loading, setLoading] = useState(true);
+/* Basic CSS for apps built with Ionic */
+import '@ionic/react/css/normalize.css';
+import '@ionic/react/css/structure.css';
+import '@ionic/react/css/typography.css';
 
-  // Kuunnellaan kirjautumistilaa
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
+/* Optional CSS utils that can be commented out */
+import '@ionic/react/css/padding.css';
+import '@ionic/react/css/float-elements.css';
+import '@ionic/react/css/text-alignment.css';
+import '@ionic/react/css/text-transformation.css';
+import '@ionic/react/css/flex-utils.css';
+import '@ionic/react/css/display.css';
 
-  const handleLogout = async () => {
-    await signOut(auth);
-    // vie welcome-sivulle
-    window.location.href = "/welcome";
-  };
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
 
-  if (loading) {
-    // Lyhyt “splashscreen”
-    return (
-      <IonApp>
-        <IonContent className="ion-padding">Loading…</IonContent>
-      </IonApp>
-    );
-  }
+/* import '@ionic/react/css/palettes/dark.always.css'; */
+/* import '@ionic/react/css/palettes/dark.class.css'; */
+import '@ionic/react/css/palettes/dark.system.css';
 
-  return (
-    <IonApp>
-      <IonReactRouter>
-        {/* Menu näkyy vain kirjautuneena */}
-        {isAuthenticated && (
-          <IonMenu contentId="main">
-            <IonHeader>
-              <IonToolbar>
-                <IonTitle>Menu</IonTitle>
-              </IonToolbar>
-            </IonHeader>
-            <IonContent>
-              <IonList>
-                <IonItem button onClick={handleLogout}>
-                  <IonLabel>Logout</IonLabel>
-                </IonItem>
-              </IonList>
-            </IonContent>
-          </IonMenu>
-        )}
+/* Theme variables */
+import './theme/variables.css';
 
-        <IonRouterOutlet id="main">
-          {!isAuthenticated && (
-            <>
-              <Route path="/welcome" component={WelcomePage} />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/register" component={RegisterPage} />
-              <Route render={() => <Redirect to="/welcome" />} />
-            </>
-          )}
+setupIonicReact();
 
-          {isAuthenticated && (
-            <>
-              <Route path="/app" component={TodoPage} />
-              <Route render={() => <Redirect to="/app" />} />
-            </>
-          )}
+const App: React.FC = () => (
+  <IonApp>
+    <IonReactRouter>
+      <IonTabs>
+        <IonRouterOutlet>
+          <Route exact path="/tab1">
+            <Tab1 />
+          </Route>
+          <Route exact path="/tab2">
+            <Tab2 />
+          </Route>
+          <Route path="/tab3">
+            <Tab3 />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/tab1" />
+          </Route>
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
