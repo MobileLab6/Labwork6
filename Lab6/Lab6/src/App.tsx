@@ -1,16 +1,12 @@
 // src/App.tsx
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   IonApp,
-  IonContent,
   IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { Route, Redirect } from 'react-router-dom';
 import Tab1 from './pages/WelcomePage';
 import Tab2 from './pages/Login';
 import Tab3 from './pages/Register';
@@ -51,24 +47,16 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/tab1" />
-          </Route>
-        </IonRouterOutlet>
-      </IonReactRouter>
-    </IonApp>
-  );
-};
+      <IonRouterOutlet>
+        <Route exact path="/tab1" component={Tab1} />
+        <Route exact path="/tab2" component={Tab2} />
+        <Route path="/tab3" component={Tab3} />
+        <Route exact path="/">
+          <Redirect to="/tab1" />
+        </Route>
+      </IonRouterOutlet>
+    </IonReactRouter>
+  </IonApp>
+);
 
 export default App;

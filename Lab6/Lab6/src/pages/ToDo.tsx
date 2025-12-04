@@ -67,7 +67,7 @@ const ToDo: React.FC = () => {
       <IonContent className="todo-content">
         <div className="todo-container">
           <h1 className="todo-title">Your To-Do List</h1>
-          
+
           <div className="tasks-container">
             {tasks.map((task) => (
               <div key={task.id} className="task-item">
