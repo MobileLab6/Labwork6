@@ -23,7 +23,7 @@ const LoginPage: React.FC = () => {
     setError("");
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push("/app", "root");
+      router.push("/ToDo", "root");
     } catch {
       setError("Kirjautuminen epäonnistui. Tarkista sähköposti ja salasana.");
     }
