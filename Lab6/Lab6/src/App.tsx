@@ -22,6 +22,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { logOut, arrowBack } from 'ionicons/icons';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
+import ProtectedRoute from "./components/ProjectedRoute";
 
 import Tab1 from './pages/WelcomePage';
 import Tab2 from './pages/LoginPage';
@@ -110,11 +111,13 @@ const App: React.FC = () => {
               <Route exact path="/tab2">
                 <Tab2 />
               </Route>
-              <Route path="/tab3">
+              <Route exact path="/tab3">
                 <Tab3 />
               </Route>
-              <Route exact path="/todo">
-                <ToDo />
+              <Route exact path="/ToDo">
+                <ProtectedRoute>
+                  <ToDo />
+                </ProtectedRoute>
               </Route>
               <Route exact path="/">
                 <Redirect to="/tab1" />
