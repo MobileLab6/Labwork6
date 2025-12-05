@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   IonContent,
   IonPage,
@@ -12,6 +12,9 @@ interface Task {
   text: string;
 }
 
+// Avain, jonka alla tehtävät säilytetään localStoragessa
+const TASKS_STORAGE_KEY = 'todo_tasks';
+
 const ToDo: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([
     { id: 1, text: 'Task 1' },
@@ -21,6 +24,28 @@ const ToDo: React.FC = () => {
   const [nextId, setNextId] = useState(4);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
+
+  // 1) Lue tehtävät localStoragesta kun komponentti ladataan
+  useEffect(() => {
+    const stored = localStorage.getItem(TASKS_STORAGE_KEY);
+    if (stored) {
+      try {
+        const parsed: Task[] = JSON.parse(stored);
+        setTasks(parsed);
+
+        // Päivitä nextId sen mukaan, mikä id on suurin
+        const maxId = parsed.reduce((max, t) => (t.id > max ? t.id : max), 0);
+        setNextId(maxId + 1);
+      } catch (e) {
+        console.error('Error parsing tasks from localStorage', e);
+      }
+    }
+  }, []);
+
+  // 2) Tallenna tehtävät localStorageen aina kun tasks muuttuu
+  useEffect(() => {
+    localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+  }, [tasks]);
 
   const addTask = () => {
     const newTask: Task = {
@@ -48,7 +73,7 @@ const ToDo: React.FC = () => {
   };
 
   const updateTask = (id: number, newText: string) => {
-    setTasks(tasks.map(task => 
+    setTasks(tasks.map(task =>
       task.id === id ? { ...task, text: newText } : task
     ));
   };
@@ -75,7 +100,7 @@ const ToDo: React.FC = () => {
         </IonButtons>
         <div className="todo-container">
           <h1 className="todo-title">Your To-Do List</h1>
-          
+
           <div className="tasks-container">
             {tasks.map((task) => (
               <div key={task.id} className="task-item">
@@ -91,14 +116,14 @@ const ToDo: React.FC = () => {
                     placeholder="Enter task..."
                   />
                 ) : (
-                  <div 
+                  <div
                     className={`task-text ${!task.text ? 'empty' : ''}`}
                     onClick={() => handleTaskClick(task.id)}
                   >
                     {task.text || 'Click to add a task'}
                   </div>
                 )}
-                <button 
+                <button
                   className="task-delete-btn"
                   onClick={() => handleDeleteClick(task.id)}
                 >
