@@ -12,37 +12,38 @@ interface Task {
   text: string;
 }
 
-// Avain, jonka alla tehtävät säilytetään localStoragessa
 const TASKS_STORAGE_KEY = 'todo_tasks';
 
 const ToDo: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>([
-    { id: 1, text: 'Task 1' },
-    { id: 2, text: 'Task 2' },
-    { id: 3, text: 'Task 3' },
-  ]);
-  const [nextId, setNextId] = useState(4);
-  const [editingId, setEditingId] = useState<number | null>(null);
-  const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
-
-  // 1) Lue tehtävät localStoragesta kun komponentti ladataan
-  useEffect(() => {
+  // 1) Alustetaan tasks suoraan localStoragen perusteella
+  const [tasks, setTasks] = useState<Task[]>(() => {
     const stored = localStorage.getItem(TASKS_STORAGE_KEY);
     if (stored) {
       try {
-        const parsed: Task[] = JSON.parse(stored);
-        setTasks(parsed);
-
-        // Päivitä nextId sen mukaan, mikä id on suurin
-        const maxId = parsed.reduce((max, t) => (t.id > max ? t.id : max), 0);
-        setNextId(maxId + 1);
+        return JSON.parse(stored) as Task[];
       } catch (e) {
         console.error('Error parsing tasks from localStorage', e);
       }
     }
-  }, []);
+    // Jos ei ole vielä mitään tallennettu -> voi halutessa palauttaa demotaskit
+    return [
+      { id: 1, text: 'Task 1' },
+      { id: 2, text: 'Task 2' },
+      { id: 3, text: 'Task 3' },
+    ];
+  });
 
-  // 2) Tallenna tehtävät localStorageen aina kun tasks muuttuu
+  // 2) Lasketaan seuraava id aina nykyisten tehtävien perusteella
+  const [nextId, setNextId] = useState<number>(() => {
+    if (tasks.length === 0) return 1;
+    const maxId = tasks.reduce((max, t) => (t.id > max ? t.id : max), 0);
+    return maxId + 1;
+  });
+
+  const [editingId, setEditingId] = useState<number | null>(null);
+  const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
+
+  // 3) Tallennetaan localStorageen aina kun tasks muuttuu
   useEffect(() => {
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
   }, [tasks]);
@@ -63,7 +64,7 @@ const ToDo: React.FC = () => {
 
   const confirmDelete = () => {
     if (deleteConfirmId !== null) {
-      setTasks(tasks.filter(task => task.id !== deleteConfirmId));
+      setTasks(tasks.filter((task) => task.id !== deleteConfirmId));
       setDeleteConfirmId(null);
     }
   };
@@ -73,9 +74,11 @@ const ToDo: React.FC = () => {
   };
 
   const updateTask = (id: number, newText: string) => {
-    setTasks(tasks.map(task =>
-      task.id === id ? { ...task, text: newText } : task
-    ));
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, text: newText } : task
+      )
+    );
   };
 
   const handleTaskClick = (id: number) => {
@@ -141,7 +144,9 @@ const ToDo: React.FC = () => {
         {deleteConfirmId !== null && (
           <div className="confirm-overlay">
             <div className="confirm-dialog">
-              <p className="confirm-text">Are you sure you want to delete this task?</p>
+              <p className="confirm-text">
+                Are you sure you want to delete this task?
+              </p>
               <div className="confirm-buttons">
                 <button className="confirm-btn-yes" onClick={confirmDelete}>
                   Yes
